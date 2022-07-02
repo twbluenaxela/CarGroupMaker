@@ -51,7 +51,7 @@ export default function CarGroupCard() {
     direction="column"
     alignItems="center"
     justify="center"
-    style={{ minHeight: '90vh', paddingTop: "20px" }}>
+    style={{ minHeight: '100vh', paddingTop: "20px" }}>
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -75,6 +75,13 @@ export default function CarGroupCard() {
             <TextField
               id="standard-basic"
               label="Territory Number 地区号"
+              variant="standard"
+              size="small"
+            />
+            <br />
+            <TextField
+              id="standard-basic"
+              label="传道时间 Hours Out"
               variant="standard"
               size="small"
             />
