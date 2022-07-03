@@ -12,6 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import InputAdornment from "@mui/material/InputAdornment";
 import SaveIcon from '@mui/icons-material/Save';
+import axios from 'axios';
 
 
 export default function CarGroupCard() {
@@ -59,6 +60,16 @@ export default function CarGroupCard() {
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log(carGroupInfo)
+    sendToDatabase(carGroupInfo)
+  }
+
+  const sendToDatabase = (obj) => {
+    axios
+    .post("/api/newcargroup", obj)
+    .then((response) => {
+      console.log(response.data)
+      // setCategories(response.data)
+    })
   }
 
   return (

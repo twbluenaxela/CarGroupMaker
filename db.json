@@ -1,0 +1,10 @@
+{
+    "CarGroups":[
+        { 
+            "CarGroupNumber": "0",
+            "TerritoryNumber": "",
+            "HoursOut": "0",
+            "People": []
+        }
+    ]
+}
