@@ -13,6 +13,7 @@ import Grid from "@mui/material/Grid";
 import InputAdornment from "@mui/material/InputAdornment";
 import SaveIcon from '@mui/icons-material/Save';
 import axios from 'axios';
+import Divider from '@mui/material/Divider';
 
 
 export default function CarGroupCard() {
@@ -75,11 +76,11 @@ export default function CarGroupCard() {
   return (
     <Grid container
     spacing={0}
-    xs={12}
+    xs={true}
     direction="column"
     alignItems="center"
     justify="center"
-    style={{ minHeight: '100vh', paddingTop: "20px" }}>
+    style={{ minHeight: '100vh', paddingTop: "80px" }}>
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -137,6 +138,7 @@ export default function CarGroupCard() {
                 <AddIcon fontSize="inherit" />
               </IconButton>
             </Typography>
+            <Divider />
             {peopleInputFields.map((input, index) => {
               return (
                 <Box key={index}>

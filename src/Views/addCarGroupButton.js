@@ -14,22 +14,18 @@ const actions = [
   { icon: <DeleteIcon />, name: 'Delete' },
 ];
 
+const fabStyle = {
+  position: 'fixed',
+  bottom: 16,
+  right: 16,
+};
+
 export default function AddCarGroupButton() {
     return (
-      <Box sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}>
-      <SpeedDial
-        ariaLabel="SpeedDial basic example"
-        sx={{ position: 'absolute', bottom: 16, right: 16 }}
-        icon={<SpeedDialIcon />}
-      >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-          />
-        ))}
-      </SpeedDial>
+      <Box sx={{ '& > :not(style)': { m: 1 } }}>
+      <Fab sx={fabStyle} color="primary" aria-label="add">
+        <AddIcon />
+      </Fab>
     </Box>
     );
 }

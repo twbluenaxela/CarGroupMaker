@@ -62,9 +62,9 @@ export default function ButtonAppBar({carGroups}) {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar  >
+    <Box sx={{ flexGrow: 1}}>
+      <AppBar position="fixed">
+        <Toolbar>
           <IconButton
             size="large"
             edge="start"
@@ -76,7 +76,7 @@ export default function ButtonAppBar({carGroups}) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Car Group App
+            Car Group App 车组管理小助手
           </Typography>
         </Toolbar>
       </AppBar>
