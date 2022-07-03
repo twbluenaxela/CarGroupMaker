@@ -81,7 +81,7 @@ export default function CarGroupCard() {
             <br />
             <TextField
               id="standard-basic"
-              label="传道时间 Hours Out"
+              label="预计传道时数 Hours Out"
               variant="standard"
               size="small"
             />
