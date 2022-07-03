@@ -11,6 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import InputAdornment from "@mui/material/InputAdornment";
+import SaveIcon from '@mui/icons-material/Save';
 
 const bull = (
   <Box
@@ -26,6 +27,8 @@ export default function CarGroupCard() {
   const [peopleInputFields, setPeopleInputFields] = React.useState([
     { name: "" },
   ]);
+
+
 
   const handleAddPeopleInputField = () => {
     let newPerson = { name: "" };
@@ -56,7 +59,18 @@ export default function CarGroupCard() {
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Car Group 车组
+            <IconButton aria-label="save car group"
+                size="small"
+                position="end"
+                >
+            <SaveIcon fontSize="inherit" />
+          </IconButton  >
+          <IconButton aria-label="delete car group"
+                size="small">
+            <DeleteIcon fontSize="inherit" />
+          </IconButton>
           </Typography>
+          
           <Box
             component="form"
             sx={{
