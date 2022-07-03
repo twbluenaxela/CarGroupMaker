@@ -1,6 +1,8 @@
 // Require dependencies
 const express = require('express');
 const path = require('path');
+const logger = require("morgan");
+
 // const cors = require('cors');
 const { Console } = require('console');
 // console.log(typeof webScraper.webScraper())

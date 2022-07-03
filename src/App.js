@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import ButtonAppBar from './Views/ButtonAppBar'
 import AddCarGroupButton from './Views/addCarGroupButton'
 import CarGroupCard from './Views/carGroupCard'
+import axios from 'axios';
 
 
 function App() {
@@ -20,7 +21,19 @@ function App() {
   an array of car groups and go by index. although an
   id might be helpful too. 
   */
-  const [carGroups, setCarGroups] = React.useState([])
+  const [carGroups, setCarGroups] = React.useState(getDatabaseInfo)
+
+  const getDatabaseInfo = () => {
+    axios
+    .get("/api/cargroupsdb")
+    .then(resp => {
+      console.log("Received stuff: ")
+      console.log(resp.data)
+      return(resp.data)
+    })
+  }
+
+
 
   return (
     <div>
