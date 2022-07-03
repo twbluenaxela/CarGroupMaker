@@ -7,6 +7,16 @@ import CarGroupCard from './Views/carGroupCard'
 import axios from 'axios';
 
 
+const getDatabaseInfo = () => {
+  axios
+  .get("/api/cargroupsdb")
+  .then(resp => {
+    console.log("Received stuff: ")
+    console.log(resp.data)
+    return(resp.data)
+  })
+}
+
 function App() {
 
   /*
@@ -21,19 +31,7 @@ function App() {
   an array of car groups and go by index. although an
   id might be helpful too. 
   */
-  const [carGroups, setCarGroups] = React.useState(getDatabaseInfo)
-
-  const getDatabaseInfo = () => {
-    axios
-    .get("/api/cargroupsdb")
-    .then(resp => {
-      console.log("Received stuff: ")
-      console.log(resp.data)
-      return(resp.data)
-    })
-  }
-
-
+  const [carGroups, setCarGroups] = React.useState(() => getDatabaseInfo())
 
   return (
     <div>

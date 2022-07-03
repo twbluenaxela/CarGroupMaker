@@ -43,8 +43,8 @@ router.get("/cargroupsdb", async(req, res) => {
   let rawdata = fs.readFileSync('db.json');
   let cargroups = JSON.parse(rawdata);
   console.log(cargroups);
-  res.json({ message: "Hello from server!" });
-  res.send("Hi!")
+  // res.json({ message: "Hello from server!" });
+  res.send(cargroups)
 
 
 })
