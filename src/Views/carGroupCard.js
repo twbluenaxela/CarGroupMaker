@@ -13,21 +13,18 @@ import Grid from "@mui/material/Grid";
 import InputAdornment from "@mui/material/InputAdornment";
 import SaveIcon from '@mui/icons-material/Save';
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
 
 export default function CarGroupCard() {
-  const [people, setPeople] = React.useState([]);
   const [peopleInputFields, setPeopleInputFields] = React.useState([
     { name: "" },
   ]);
-
+  const [carGroupInfo, setCarGroupInfo] = React.useState(
+    {CarGroupNumber: 0,
+    TerritoryNumber: "",
+    HoursOut: 0,
+    People: [...peopleInputFields]
+  }
+    )
 
 
   const handleAddPeopleInputField = () => {
@@ -45,7 +42,24 @@ export default function CarGroupCard() {
     let data = [...peopleInputFields];
     data[index][event.target.name] = event.target.value;
     setPeopleInputFields(data);
+    setCarGroupInfo({
+      ...carGroupInfo,
+      People: data,
+    })
   };
+
+  const handleInputChange = (event) => {
+    const {name, value} = event.target;
+    setCarGroupInfo({
+      ...carGroupInfo,
+      [name]: value,
+    })
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log(carGroupInfo)
+  }
 
   return (
     <Grid container
@@ -59,18 +73,11 @@ export default function CarGroupCard() {
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Car Group 车组
-            <IconButton aria-label="save car group"
-                size="small"
-                position="end"
-                >
-            <SaveIcon fontSize="inherit" />
-          </IconButton  >
           <IconButton aria-label="delete car group"
                 size="small">
             <DeleteIcon fontSize="inherit" />
           </IconButton>
           </Typography>
-          
           <Box
             component="form"
             sx={{
@@ -78,12 +85,16 @@ export default function CarGroupCard() {
             }}
             noValidate
             autoComplete="off"
+            onSubmit={handleSubmit}
           >
             <TextField
               id="outlined-basic"
               label="Car Group # 车组号码"
               variant="outlined"
               size="small"
+              name="CarGroupNumber"
+              value={carGroupInfo.CarGroupNumber}
+              onChange={handleInputChange}
             />
             <br />
             <TextField
@@ -91,6 +102,9 @@ export default function CarGroupCard() {
               label="Territory Number 地区号"
               variant="standard"
               size="small"
+              name="TerritoryNumber"
+              value={carGroupInfo.TerritoryNumber}
+              onChange={handleInputChange}
             />
             <br />
             <TextField
@@ -98,6 +112,9 @@ export default function CarGroupCard() {
               label="预计传道时数 Hours Out"
               variant="standard"
               size="small"
+              name="HoursOut"
+              value={carGroupInfo.HoursOut}
+              onChange={handleInputChange}
             />
             <Typography variant="h7" component="div">
               人员 People
@@ -113,9 +130,10 @@ export default function CarGroupCard() {
               return (
                 <Box key={index}>
                   <TextField
-                    id="person"
+                    id="name-input"
                     label="Name 姓名"
                     variant="standard"
+                    name="name"
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -135,6 +153,7 @@ export default function CarGroupCard() {
                 </Box>
               );
             })}
+          <Button variant="contained" type="submit" >Submit</Button>
           </Box>
         </CardContent>
       </Card>
