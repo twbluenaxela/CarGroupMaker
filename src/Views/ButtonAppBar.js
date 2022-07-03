@@ -15,14 +15,18 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar({carGroups}) {
   const [drawerState, setDrawerState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
+
+  // console.log("Cargroups is in the buttonappbar: ")
+  // console.log(carGroups)
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -43,26 +47,13 @@ export default function ButtonAppBar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
+        {carGroups.CarGroups.map((item) => (
+          <ListItem key={item.CarGroupNumber} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <DirectionsCarFilledIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={"Car Group " + item.CarGroupNumber} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -96,7 +87,7 @@ export default function ButtonAppBar() {
           onClose={toggleDrawer("left", false)}
           onOpen={toggleDrawer("left", true)}
         >
-          {list("left")}
+          {carGroups && list("left")}
         </SwipeableDrawer>
       </React.Fragment>
     </Box>

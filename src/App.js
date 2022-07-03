@@ -17,6 +17,7 @@ const getDatabaseInfo = () => {
   })
 }
 
+
 function App() {
 
   /*
@@ -33,9 +34,23 @@ function App() {
   */
   const [carGroups, setCarGroups] = React.useState(() => getDatabaseInfo())
 
+  const defaultCarGroup = {CarGroups: [{ 
+    CarGroupNumber: "0",
+    TerritoryNumber: "",
+    HoursOut: "0",
+    People: []
+}]}
+
+  let loadedCarGroups = false;
+
+  React.useEffect(() => {
+    loadedCarGroups = true;
+
+  },[carGroups])
+
   return (
     <div>
-      <ButtonAppBar carGroups={carGroups} />
+      <ButtonAppBar carGroups={carGroups ? carGroups : defaultCarGroup} />
       <AddCarGroupButton />
       <CarGroupCard />
     </div>
