@@ -35,7 +35,7 @@ function App() {
   const [carGroups, setCarGroups] = React.useState(() => getDatabaseInfo())
 
   const defaultCarGroup = {CarGroups: [{ 
-    CarGroupNumber: "0",
+    CarGroupNumber: "1",
     TerritoryNumber: "",
     HoursOut: "0",
     People: []
