@@ -16,9 +16,9 @@ import axios from "axios";
 import Divider from "@mui/material/Divider";
 
 const defaultCarGroupInfo = {
-  CarGroupNumber: 1,
+  CarGroupNumber: "1",
   TerritoryNumber: "",
-  HoursOut: 0,
+  HoursOut: "0",
   People: [{ name: "" }],
 }
 
@@ -70,14 +70,29 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard }) {
     sendToDatabase(carGroupInfo);
   };
 
+  const handleDelete = (event) => {
+    event.preventDefault();
+    console.log("Car group to delete: ")
+    console.log(carGroupInfo)
+    deleteFromDatabase(carGroupInfo)
+  }
+
   const sendToDatabase = (obj) => {
     axios.post("/api/newcargroup", obj).then((response) => {
       console.log(response.data);
       setRefresh(+new Date());
-      console.log("Sent to database!")
-      console.log("Resetting Refresh state variable...")
+      // console.log("Sent to database!")
+      // console.log("Resetting Refresh state variable...")
     });
   };
+
+  const deleteFromDatabase = (obj) => {
+    axios.post("/api/deletecargroup", obj).then((response) => {
+      console.log("Deleted successfully.")
+      console.log(response.data)
+      setRefresh(+new Date());
+    })
+  }
 
   return (
     <Grid
@@ -93,7 +108,7 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard }) {
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Car Group 车组
-            <IconButton aria-label="delete car group" size="small">
+            <IconButton aria-label="delete car group" size="small" onClick={handleDelete}>
               <DeleteIcon fontSize="inherit" />
             </IconButton>
           </Typography>

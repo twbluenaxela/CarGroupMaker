@@ -38,7 +38,6 @@ router.post("/newcargroup", (req, res)=> {
   let carGroupsDb = JSON.parse(rawdata);
   console.log("Here's what in the database currently.")
   console.log(carGroupsDb)
-  const isExistingCarGroup = (element) => element.CarGroupNumber === ReceivedCarGroupObj.CarGroupNumber
   //First, check if there is any entry currently in the database with
   //a matching car group number. If there is, then update that entry.
   //If not, then that new entry to the database.
@@ -47,9 +46,7 @@ router.post("/newcargroup", (req, res)=> {
     carGroupsDb.CarGroups.forEach(element => {
         console.log("Found existing car group with matching Car Group Number.")
         for(let property in element){
-          // console.log(property,element[property]);
           element[property] = ReceivedCarGroupObj[property]
-          // console.log(element[property])
         }
         console.log("Entry has been updated.")
         console.log(element)
@@ -62,15 +59,6 @@ router.post("/newcargroup", (req, res)=> {
   }
   console.log("Updating the database...")
   fs.writeFileSync('db.json', dataToWrite)
-  // if(carGroupsDb.CarGroups.some(e => e.CarGroupNumber === ReceivedCarGroupObj.CarGroupNumber)){
-  //   console.log("Found an entry with the same car group number. Updating...")
-  //   for (prop in e){
-  //     console.log(prop)
-  //     e.prop = ReceivedCarGroupObj.prop
-  //   }
-  // }
-  // CarGroups.push(CarGroupObj)
-  // console.log("Here's how many are in CarGroups: " + CarGroups.length)
   res.send("Added a new car group!")
 })
 
@@ -79,9 +67,25 @@ router.get("/cargroupsdb", async(req, res) => {
   let rawdata = fs.readFileSync('db.json');
   let cargroups = JSON.parse(rawdata);
   console.log(cargroups);
-  // res.json({ message: "Hello from server!" });
   res.send(cargroups)
-
-
 })
 
+router.post("/deletecargroup", async(req, res) => {
+  console.log("Received deletion request.")
+  const carGroupToDelete = req.body
+  const isExistingCarGroup = (element) => element.CarGroupNumber === carGroupToDelete.CarGroupNumber
+  let rawdata = fs.readFileSync('db.json');
+  let carGroupsDb = JSON.parse(rawdata);
+  console.log("Index of the item to be deleted.")
+  let indexOfItemToDelete = carGroupsDb.CarGroups.findIndex(isExistingCarGroup)
+  console.log(indexOfItemToDelete)
+  if(indexOfItemToDelete > -1){
+    carGroupsDb.CarGroups.splice(indexOfItemToDelete, 1)
+    console.log(carGroupsDb)
+    let data = JSON.stringify(carGroupsDb)
+    console.log(data)
+    console.log("Deleting from database...")
+    fs.writeFileSync('db.json', data)
+  }
+  res.send("Server: Deleted from database.")
+})
