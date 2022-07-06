@@ -43,9 +43,9 @@ function App() {
     getDatabaseInfo();
   },[])
 
-  // React.useEffect(() => {
-
-  // },[resetCarGroupCard])
+  React.useEffect(() => {
+    getDatabaseInfo();
+  },[refresh])
 
   const defaultCarGroup = {CarGroups: [{ 
     CarGroupNumber: "1",

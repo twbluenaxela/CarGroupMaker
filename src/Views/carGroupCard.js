@@ -74,6 +74,8 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard }) {
     axios.post("/api/newcargroup", obj).then((response) => {
       console.log(response.data);
       setRefresh(+new Date());
+      console.log("Sent to database!")
+      console.log("Resetting Refresh state variable...")
     });
   };
 
