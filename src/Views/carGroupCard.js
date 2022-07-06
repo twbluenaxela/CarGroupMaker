@@ -69,7 +69,6 @@ export default function CarGroupCard() {
     .post("/api/newcargroup", obj)
     .then((response) => {
       console.log(response.data)
-      // setCategories(response.data)
     })
   }
 

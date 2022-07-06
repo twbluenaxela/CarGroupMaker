@@ -33,6 +33,11 @@ function App() {
   id might be helpful too. 
   */
   const [carGroups, setCarGroups] = React.useState(() => getDatabaseInfo())
+  const [refresh, setRefresh] = React.useState(0)
+
+  const forceUpdate = () => {
+    setRefresh(val => val + 1)
+  }
 
   const defaultCarGroup = {CarGroups: [{ 
     CarGroupNumber: "1",
@@ -44,15 +49,16 @@ function App() {
   let loadedCarGroups = false;
 
   React.useEffect(() => {
-    loadedCarGroups = true;
-
-  },[carGroups])
+    setCarGroups(() => getDatabaseInfo)
+    forceUpdate();
+    console.log("Refreshing with new data...")
+  },[refresh])
 
   return (
     <div>
       <ButtonAppBar carGroups={carGroups ? carGroups : defaultCarGroup} />
-      <AddCarGroupButton />
-      <CarGroupCard />
+      <AddCarGroupButton setCarGroups={setCarGroups} />
+      <CarGroupCard setRefresh={setRefresh} />
     </div>
   );
 }
