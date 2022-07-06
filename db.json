@@ -1,10 +1,16 @@
 {
-    "CarGroups":[
-        { 
-            "CarGroupNumber": "1",
-            "TerritoryNumber": "",
-            "HoursOut": "0",
-            "People": []
-        }
-    ]
+  "CarGroups": [
+    {
+      "CarGroupNumber": "2",
+      "TerritoryNumber": "111111",
+      "HoursOut": "1",
+      "People": [{ "name": "hi" }]
+    },
+    {
+      "CarGroupNumber": "4",
+      "TerritoryNumber": "111111",
+      "HoursOut": "1",
+      "People": [{ "name": "hi" }]
+    }
+  ]
 }

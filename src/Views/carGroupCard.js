@@ -16,7 +16,7 @@ import axios from 'axios';
 import Divider from '@mui/material/Divider';
 
 
-export default function CarGroupCard() {
+export default function CarGroupCard({setRefresh}) {
   const [peopleInputFields, setPeopleInputFields] = React.useState([
     { name: "" },
   ]);
@@ -69,6 +69,7 @@ export default function CarGroupCard() {
     .post("/api/newcargroup", obj)
     .then((response) => {
       console.log(response.data)
+      setRefresh(val => val + 1)
     })
   }
 

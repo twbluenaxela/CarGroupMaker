@@ -54,10 +54,11 @@ router.post("/newcargroup", (req, res)=> {
         console.log("Entry has been updated.")
         console.log(element)
     })
-    dataToWrite = JSON.stringify(carGroupsDb.CarGroups)
+    dataToWrite = JSON.stringify(carGroupsDb)
   }else{
-    let arrayWrapper = {CarGroups: [...ReceivedCarGroupObj]}
-    dataToWrite = JSON.stringify(arrayWrapper)
+    
+    carGroupsDb.CarGroups.push(ReceivedCarGroupObj)
+    dataToWrite = JSON.stringify(carGroupsDb)
   }
   console.log("Updating the database...")
   fs.writeFileSync('db.json', dataToWrite)
