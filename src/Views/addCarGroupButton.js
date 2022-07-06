@@ -20,10 +20,18 @@ const fabStyle = {
   right: 16,
 };
 
-export default function AddCarGroupButton() {
+
+
+export default function AddCarGroupButton({setResetCarGroupCard}) {
+
+  const makeBlankCarGroupCard = () => {
+    console.log("Sending request to make a new blank card...")
+    setResetCarGroupCard(prevVal => prevVal + 1)
+  }
+
     return (
       <Box sx={{ '& > :not(style)': { m: 1 } }}>
-      <Fab sx={fabStyle} color="primary" aria-label="add">
+      <Fab sx={fabStyle} color="primary" aria-label="add" onClick={makeBlankCarGroupCard}>
         <AddIcon />
       </Fab>
     </Box>

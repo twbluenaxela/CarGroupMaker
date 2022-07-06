@@ -23,6 +23,7 @@ function App() {
   */
   const [carGroups, setCarGroups] = React.useState(null)
   const [refresh, setRefresh] = React.useState(0)
+  const [resetCarGroupCard, setResetCarGroupCard] = React.useState(null)
 
   // const forceUpdate = () => {
   //   setRefresh(val => val + 1)
@@ -42,6 +43,9 @@ function App() {
     getDatabaseInfo();
   },[])
 
+  // React.useEffect(() => {
+
+  // },[resetCarGroupCard])
 
   const defaultCarGroup = {CarGroups: [{ 
     CarGroupNumber: "1",
@@ -64,8 +68,8 @@ function App() {
   return (
     <div>
       <ButtonAppBar carGroups={carGroups ? carGroups : defaultCarGroup} />
-      <AddCarGroupButton setCarGroups={setCarGroups} />
-      <CarGroupCard setRefresh={setRefresh} />
+      <AddCarGroupButton setResetCarGroupCard={setResetCarGroupCard} />
+      <CarGroupCard setRefresh={setRefresh} resetCarGroupCard={resetCarGroupCard}/>
     </div>
   );
 }

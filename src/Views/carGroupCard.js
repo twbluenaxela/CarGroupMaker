@@ -11,23 +11,29 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import InputAdornment from "@mui/material/InputAdornment";
-import SaveIcon from '@mui/icons-material/Save';
-import axios from 'axios';
-import Divider from '@mui/material/Divider';
+import SaveIcon from "@mui/icons-material/Save";
+import axios from "axios";
+import Divider from "@mui/material/Divider";
 
+const defaultCarGroupInfo = {
+  CarGroupNumber: 1,
+  TerritoryNumber: "",
+  HoursOut: 0,
+  People: [{ name: "" }],
+}
 
-export default function CarGroupCard({setRefresh}) {
+export default function CarGroupCard({ setRefresh, resetCarGroupCard }) {
+
   const [peopleInputFields, setPeopleInputFields] = React.useState([
     { name: "" },
   ]);
-  const [carGroupInfo, setCarGroupInfo] = React.useState(
-    {CarGroupNumber: 1,
-    TerritoryNumber: "",
-    HoursOut: 0,
-    People: [...peopleInputFields]
-  }
-    )
+  const [carGroupInfo, setCarGroupInfo] = React.useState(defaultCarGroupInfo);
 
+  
+
+  React.useEffect(() => {
+    setCarGroupInfo(defaultCarGroupInfo)
+  },[resetCarGroupCard])
 
   const handleAddPeopleInputField = () => {
     let newPerson = { name: "" };
@@ -47,48 +53,47 @@ export default function CarGroupCard({setRefresh}) {
     setCarGroupInfo({
       ...carGroupInfo,
       People: data,
-    })
+    });
   };
 
   const handleInputChange = (event) => {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
     setCarGroupInfo({
       ...carGroupInfo,
       [name]: value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log(carGroupInfo)
-    sendToDatabase(carGroupInfo)
-  }
+    event.preventDefault();
+    console.log(carGroupInfo);
+    sendToDatabase(carGroupInfo);
+  };
 
   const sendToDatabase = (obj) => {
-    axios
-    .post("/api/newcargroup", obj)
-    .then((response) => {
-      console.log(response.data)
-      setRefresh(val => val + 1)
-    })
-  }
+    axios.post("/api/newcargroup", obj).then((response) => {
+      console.log(response.data);
+      setRefresh(+new Date());
+    });
+  };
 
   return (
-    <Grid container
-    spacing={0}
-    xs={true}
-    direction="column"
-    alignItems="center"
-    justify="center"
-    style={{ minHeight: '100vh', paddingTop: "80px" }}>
+    <Grid
+      container
+      spacing={0}
+      xs={true}
+      direction="column"
+      alignItems="center"
+      justify="center"
+      style={{ minHeight: "100vh", paddingTop: "80px" }}
+    >
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Car Group 车组
-          <IconButton aria-label="delete car group"
-                size="small">
-            <DeleteIcon fontSize="inherit" />
-          </IconButton>
+            <IconButton aria-label="delete car group" size="small">
+              <DeleteIcon fontSize="inherit" />
+            </IconButton>
           </Typography>
           <Box
             component="form"
@@ -166,7 +171,9 @@ export default function CarGroupCard({setRefresh}) {
                 </Box>
               );
             })}
-          <Button variant="contained" type="submit" >Submit</Button>
+            <Button variant="contained" type="submit">
+              Save 保存
+            </Button>
           </Box>
         </CardContent>
       </Card>
