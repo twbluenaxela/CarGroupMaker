@@ -25,8 +25,8 @@ export default function ButtonAppBar({carGroups}) {
     right: false,
   });
 
-  // console.log("Cargroups is in the buttonappbar: ")
-  // console.log(carGroups)
+  console.log("Cargroups is in the buttonappbar: ")
+  console.log(carGroups)
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -47,16 +47,16 @@ export default function ButtonAppBar({carGroups}) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {carGroups.CarGroups.map((item) => (
+        {carGroups.CarGroups.map(item => {
           <ListItem key={item.CarGroupNumber} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <DirectionsCarFilledIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Car Group " + item.CarGroupNumber} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+          <ListItemButton>
+            <ListItemIcon>
+              <DirectionsCarFilledIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Car Group " + item.CarGroupNumber} />
+          </ListItemButton>
+        </ListItem>
+        })}
       </List>
     </Box>
   );

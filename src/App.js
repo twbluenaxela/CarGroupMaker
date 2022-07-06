@@ -7,17 +7,6 @@ import CarGroupCard from './Views/carGroupCard'
 import axios from 'axios';
 
 
-const getDatabaseInfo = () => {
-  axios
-  .get("/api/cargroupsdb")
-  .then(resp => {
-    console.log("Received stuff: ")
-    console.log(resp.data)
-    return(resp.data)
-  })
-}
-
-
 function App() {
 
   /*
@@ -32,12 +21,27 @@ function App() {
   an array of car groups and go by index. although an
   id might be helpful too. 
   */
-  const [carGroups, setCarGroups] = React.useState(() => getDatabaseInfo())
+  const [carGroups, setCarGroups] = React.useState(null)
   const [refresh, setRefresh] = React.useState(0)
 
-  const forceUpdate = () => {
-    setRefresh(val => val + 1)
+  // const forceUpdate = () => {
+  //   setRefresh(val => val + 1)
+  // }
+
+  const getDatabaseInfo = async () => {
+    axios
+    .get("/api/cargroupsdb")
+    .then(resp => {
+      console.log("Received info from database: ")
+      console.log(resp.data)
+      setCarGroups(resp.data)
+    })
   }
+
+  React.useEffect(() => {
+    getDatabaseInfo();
+  },[])
+
 
   const defaultCarGroup = {CarGroups: [{ 
     CarGroupNumber: "1",
@@ -48,11 +52,14 @@ function App() {
 
   let loadedCarGroups = false;
 
-  React.useEffect(() => {
-    setCarGroups(() => getDatabaseInfo)
-    forceUpdate();
-    console.log("Refreshing with new data...")
-  },[refresh])
+  // React.useEffect(() => {
+  //   let newCarGroupData = getDatabaseInfo()
+  //   console.log("New car group data: ")
+  //   console.log(newCarGroupData)
+  //   setCarGroups(newCarGroupData)
+  //   console.log("Refreshing with new data...")
+  //   console.log(carGroups)
+  // },[refresh])
 
   return (
     <div>
