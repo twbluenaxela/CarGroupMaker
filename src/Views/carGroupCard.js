@@ -21,7 +21,7 @@ export default function CarGroupCard({setRefresh}) {
     { name: "" },
   ]);
   const [carGroupInfo, setCarGroupInfo] = React.useState(
-    {CarGroupNumber: 0,
+    {CarGroupNumber: 1,
     TerritoryNumber: "",
     HoursOut: 0,
     People: [...peopleInputFields]
