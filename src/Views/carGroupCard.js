@@ -107,6 +107,7 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
     axios.post("/api/deletecargroup", obj).then((response) => {
       console.log("Deleted successfully.")
       console.log(response.data)
+      setCarGroupInfo(defaultCarGroupInfo)
       setRefresh(+new Date());
     })
   }
