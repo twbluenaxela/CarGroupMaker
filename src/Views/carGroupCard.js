@@ -175,9 +175,11 @@ export default function CarGroupCard({
             </Typography>
             <Button
                 variant="outlined"
+                aria-label="delete car group"
                 endIcon={<DeleteIcon />}
                 color="error"
-                fontSize="10"
+                fontSize="8"
+                onClick={handleDelete}
                 size="small"
                 sx={{marginLeft: "5px", marginBottom: "5px"}}
               >
