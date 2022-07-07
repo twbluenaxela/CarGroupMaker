@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import AddIcon from "@mui/icons-material/Add";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
@@ -15,68 +15,68 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SaveIcon from "@mui/icons-material/Save";
 import axios from "axios";
 import Divider from "@mui/material/Divider";
-import Snackbar from '@mui/material/Snackbar';
-
+import Snackbar from "@mui/material/Snackbar";
 
 const defaultCarGroupInfo = {
   CarGroupNumber: "1",
   TerritoryNumber: "",
   HoursOut: "0",
   People: [{ name: "小冰" }],
-}
+};
 
-export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCarGroupCard }) {
-
+export default function CarGroupCard({
+  setRefresh,
+  resetCarGroupCard,
+  selectedCarGroupCard,
+}) {
   const [carGroupInfo, setCarGroupInfo] = React.useState(defaultCarGroupInfo);
 
-  const [open, setOpen] = React.useState(false)
-  const [snackbarMessage, setSnackbarMessage] = React.useState(null)
+  const [open, setOpen] = React.useState(false);
+  const [snackbarMessage, setSnackbarMessage] = React.useState(null);
 
   const openSnackbar = (message) => {
-    setSnackbarMessage(message)
+    setSnackbarMessage(message);
     setOpen(true);
-  }
+  };
 
   const closeSnackbar = () => {
-    setOpen(false)
-  }
-
-  
+    setOpen(false);
+  };
 
   React.useEffect(() => {
-    setCarGroupInfo(defaultCarGroupInfo)
-  },[resetCarGroupCard])
+    setCarGroupInfo(defaultCarGroupInfo);
+  }, [resetCarGroupCard]);
 
   React.useEffect(() => {
-    if(selectedCarGroupCard != null){
-      setCarGroupInfo(selectedCarGroupCard)
+    if (selectedCarGroupCard != null) {
+      setCarGroupInfo(selectedCarGroupCard);
     }
-  },[selectedCarGroupCard])
+  }, [selectedCarGroupCard]);
 
   const handleAddPeopleInputField = () => {
     let newPerson = { name: "" };
     // setPeopleInputFields([...peopleInputFields, newPerson]);
-    let data = [... carGroupInfo.People]
-    data.push(newPerson)
+    let data = [...carGroupInfo.People];
+    data.push(newPerson);
     setCarGroupInfo({
       ...carGroupInfo,
-      People: data
-    })
+      People: data,
+    });
   };
 
   const handleRemovePeopleInputField = (index) => {
     // let data = [...peopleInputFields];
-    let data = [... carGroupInfo.People]
+    let data = [...carGroupInfo.People];
     data.splice(index, 1);
     // setPeopleInputFields(data);
     setCarGroupInfo({
       ...carGroupInfo,
-      People: data
-    })
+      People: data,
+    });
   };
 
   const handleFormChange = (index, event) => {
-    let data = [... carGroupInfo.People]
+    let data = [...carGroupInfo.People];
     data[index][event.target.name] = event.target.value;
     // setPeopleInputFields(data);
     setCarGroupInfo({
@@ -101,15 +101,15 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
 
   const handleDelete = (event) => {
     event.preventDefault();
-    console.log("Car group to delete: ")
-    console.log(carGroupInfo)
-    deleteFromDatabase(carGroupInfo)
-  }
+    console.log("Car group to delete: ");
+    console.log(carGroupInfo);
+    deleteFromDatabase(carGroupInfo);
+  };
 
   const sendToDatabase = (obj) => {
     axios.post("/api/newcargroup", obj).then((response) => {
       console.log(response.data);
-      openSnackbar("Saved! 保存成功")
+      openSnackbar("Saved! 保存成功");
       setRefresh(+new Date());
       // console.log("Sent to database!")
       // console.log("Resetting Refresh state variable...")
@@ -118,13 +118,13 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
 
   const deleteFromDatabase = (obj) => {
     axios.post("/api/deletecargroup", obj).then((response) => {
-      console.log("Deleted successfully.")
-      console.log(response.data)
-      setCarGroupInfo(defaultCarGroupInfo)
-      openSnackbar("Deleted! 删除了")
+      console.log("Deleted successfully.");
+      console.log(response.data);
+      setCarGroupInfo(defaultCarGroupInfo);
+      openSnackbar("Deleted! 删除了");
       setRefresh(+new Date());
-    })
-  }
+    });
+  };
 
   const action = (
     <React.Fragment>
@@ -147,16 +147,44 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
       direction="column"
       alignItems="center"
       justifyContent="center"
-      style={{ minHeight: "100vh"}}
+      style={{ minHeight: "100vh" }}
     >
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Car Group 车组
-            <IconButton aria-label="delete car group" size="small" onClick={handleDelete}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              Car Group 车组
+              
+              {/**
+             * <IconButton aria-label="delete car group" size="small" onClick={handleDelete}>
               <DeleteIcon fontSize="inherit" />
             </IconButton>
-          </Typography>
+             * 
+             * 
+             * 
+             */}
+            </Typography>
+            <Button
+                variant="outlined"
+                endIcon={<DeleteIcon />}
+                color="error"
+                fontSize="10"
+                size="small"
+                sx={{marginLeft: "5px", marginBottom: "5px"}}
+              >
+                Delete 删掉
+              </Button>
+          </div>
+
           <Box
             component="form"
             sx={{
@@ -247,7 +275,6 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
         message={snackbarMessage ? snackbarMessage : undefined}
         action={action}
       />
-      
     </Grid>
   );
 }
