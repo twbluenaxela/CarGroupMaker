@@ -42,14 +42,16 @@ router.post("/newcargroup", (req, res)=> {
   //a matching car group number. If there is, then update that entry.
   //If not, then that new entry to the database.
   let dataToWrite
-  if(carGroupsDb.CarGroups.some(e => e.CarGroupNumber === ReceivedCarGroupObj.CarGroupNumber)){
+  if(carGroupsDb.CarGroups.some(e => e.CarGroupNumber == ReceivedCarGroupObj.CarGroupNumber)){
     carGroupsDb.CarGroups.forEach(element => {
-        console.log("Found existing car group with matching Car Group Number.")
+      console.log("Found existing car group with matching Car Group Number.")
+      if(element.CarGroupNumber == ReceivedCarGroupObj.CarGroupNumber){
         for(let property in element){
           element[property] = ReceivedCarGroupObj[property]
         }
         console.log("Entry has been updated.")
         console.log(element)
+      }
     })
     dataToWrite = JSON.stringify(carGroupsDb)
   }else{
@@ -73,7 +75,7 @@ router.get("/cargroupsdb", async(req, res) => {
 router.post("/deletecargroup", async(req, res) => {
   console.log("Received deletion request.")
   const carGroupToDelete = req.body
-  const isExistingCarGroup = (element) => element.CarGroupNumber === carGroupToDelete.CarGroupNumber
+  const isExistingCarGroup = (element) => element.CarGroupNumber == carGroupToDelete.CarGroupNumber
   let rawdata = fs.readFileSync('db.json');
   let carGroupsDb = JSON.parse(rawdata);
   console.log("Index of the item to be deleted.")
