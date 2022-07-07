@@ -19,7 +19,7 @@ const defaultCarGroupInfo = {
   CarGroupNumber: "1",
   TerritoryNumber: "",
   HoursOut: "0",
-  People: [{ name: "" }],
+  People: [{ name: "小冰" }],
 }
 
 export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCarGroupCard }) {
@@ -43,19 +43,30 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
 
   const handleAddPeopleInputField = () => {
     let newPerson = { name: "" };
-    setPeopleInputFields([...peopleInputFields, newPerson]);
+    // setPeopleInputFields([...peopleInputFields, newPerson]);
+    let data = [... carGroupInfo.People]
+    data.push(newPerson)
+    setCarGroupInfo({
+      ...carGroupInfo,
+      People: data
+    })
   };
 
   const handleRemovePeopleInputField = (index) => {
-    let data = [...peopleInputFields];
+    // let data = [...peopleInputFields];
+    let data = [... carGroupInfo.People]
     data.splice(index, 1);
-    setPeopleInputFields(data);
+    // setPeopleInputFields(data);
+    setCarGroupInfo({
+      ...carGroupInfo,
+      People: data
+    })
   };
 
   const handleFormChange = (index, event) => {
-    let data = [...peopleInputFields];
+    let data = [... carGroupInfo.People]
     data[index][event.target.name] = event.target.value;
-    setPeopleInputFields(data);
+    // setPeopleInputFields(data);
     setCarGroupInfo({
       ...carGroupInfo,
       People: data,
@@ -167,7 +178,7 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
               </IconButton>
             </Typography>
             <Divider />
-            {peopleInputFields.map((input, index) => {
+            {carGroupInfo.People.map((input, index) => {
               return (
                 <Box key={index}>
                   <TextField
