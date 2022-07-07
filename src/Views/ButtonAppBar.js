@@ -12,10 +12,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
+
 
 export default function ButtonAppBar({carGroups, setSelectedCarGroupCard}) {
   const [drawerState, setDrawerState] = React.useState({
@@ -24,6 +23,8 @@ export default function ButtonAppBar({carGroups, setSelectedCarGroupCard}) {
     bottom: false,
     right: false,
   });
+
+  
 
   console.log("Cargroups is in the buttonappbar: ")
   console.log(carGroups.CarGroups)
@@ -44,6 +45,8 @@ export default function ButtonAppBar({carGroups, setSelectedCarGroupCard}) {
     const indexOfCarGroupListItem = event.currentTarget.value
     setSelectedCarGroupCard(carGroups.CarGroups[indexOfCarGroupListItem])
   }
+
+ 
 
   const list = (anchor) => (
     <Box

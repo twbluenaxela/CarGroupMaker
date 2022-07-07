@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import AddIcon from "@mui/icons-material/Add";
+import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
@@ -14,6 +15,8 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SaveIcon from "@mui/icons-material/Save";
 import axios from "axios";
 import Divider from "@mui/material/Divider";
+import Snackbar from '@mui/material/Snackbar';
+
 
 const defaultCarGroupInfo = {
   CarGroupNumber: "1",
@@ -25,6 +28,16 @@ const defaultCarGroupInfo = {
 export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCarGroupCard }) {
 
   const [carGroupInfo, setCarGroupInfo] = React.useState(defaultCarGroupInfo);
+
+  const [open, setOpen] = React.useState(false)
+
+  const openSnackbar = () => {
+    setOpen(true);
+  }
+
+  const closeSnackbar = () => {
+    setOpen(false)
+  }
 
   
 
@@ -94,6 +107,7 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
   const sendToDatabase = (obj) => {
     axios.post("/api/newcargroup", obj).then((response) => {
       console.log(response.data);
+      setOpen(true);
       setRefresh(+new Date());
       // console.log("Sent to database!")
       // console.log("Resetting Refresh state variable...")
@@ -108,6 +122,19 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
       setRefresh(+new Date());
     })
   }
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={closeSnackbar}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
   return (
     <Grid
@@ -209,6 +236,28 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
           </Box>
         </CardContent>
       </Card>
+      <Snackbar
+        name="saveSnackbar"
+        open={open}
+        autoHideDuration={1500}
+        onClose={closeSnackbar}
+        message="Saved! 保存成功"
+        action={action}
+      />
+      {/*
+      <Snackbar
+        name="deleteSnackbar"
+        open={open}
+        autoHideDuration={1500}
+        onClose={closeSnackbar}
+        message="Deleted! 删除了"
+        action={action}
+      />
+      
+      
+      */
+      }
+      
     </Grid>
   );
 }
