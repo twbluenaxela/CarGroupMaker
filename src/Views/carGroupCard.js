@@ -30,8 +30,10 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
   const [carGroupInfo, setCarGroupInfo] = React.useState(defaultCarGroupInfo);
 
   const [open, setOpen] = React.useState(false)
+  const [snackbarMessage, setSnackbarMessage] = React.useState(null)
 
-  const openSnackbar = () => {
+  const openSnackbar = (message) => {
+    setSnackbarMessage(message)
     setOpen(true);
   }
 
@@ -107,7 +109,7 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
   const sendToDatabase = (obj) => {
     axios.post("/api/newcargroup", obj).then((response) => {
       console.log(response.data);
-      setOpen(true);
+      openSnackbar("Saved! 保存成功")
       setRefresh(+new Date());
       // console.log("Sent to database!")
       // console.log("Resetting Refresh state variable...")
@@ -119,6 +121,7 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
       console.log("Deleted successfully.")
       console.log(response.data)
       setCarGroupInfo(defaultCarGroupInfo)
+      openSnackbar("Deleted! 删除了")
       setRefresh(+new Date());
     })
   }
@@ -241,22 +244,9 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
         open={open}
         autoHideDuration={1500}
         onClose={closeSnackbar}
-        message="Saved! 保存成功"
+        message={snackbarMessage ? snackbarMessage : undefined}
         action={action}
       />
-      {/*
-      <Snackbar
-        name="deleteSnackbar"
-        open={open}
-        autoHideDuration={1500}
-        onClose={closeSnackbar}
-        message="Deleted! 删除了"
-        action={action}
-      />
-      
-      
-      */
-      }
       
     </Grid>
   );
