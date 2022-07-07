@@ -24,9 +24,6 @@ const defaultCarGroupInfo = {
 
 export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCarGroupCard }) {
 
-  const [peopleInputFields, setPeopleInputFields] = React.useState([
-    { name: "" },
-  ]);
   const [carGroupInfo, setCarGroupInfo] = React.useState(defaultCarGroupInfo);
 
   
@@ -169,7 +166,7 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
               onChange={handleInputChange}
             />
             <Typography variant="h7" component="div">
-              人员 People
+              People 人员
               <IconButton
                 aria-label="add people"
                 size="small"

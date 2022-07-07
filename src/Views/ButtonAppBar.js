@@ -59,7 +59,7 @@ export default function ButtonAppBar({carGroups, setSelectedCarGroupCard}) {
               <ListItemIcon>
                 <DirectionsCarFilledIcon />
               </ListItemIcon>
-              <ListItemText primary={"Car Group " + item.CarGroupNumber} />
+              <ListItemText primary={"Car Group 车组 " + item.CarGroupNumber} />
             </ListItemButton>
           </ListItem>
         ))}
