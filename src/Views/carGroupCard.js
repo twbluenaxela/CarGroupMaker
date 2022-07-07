@@ -36,7 +36,9 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
   },[resetCarGroupCard])
 
   React.useEffect(() => {
-    setCarGroupInfo(selectedCarGroupCard)
+    if(selectedCarGroupCard != null){
+      setCarGroupInfo(selectedCarGroupCard)
+    }
   },[selectedCarGroupCard])
 
   const handleAddPeopleInputField = () => {

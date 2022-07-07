@@ -42,7 +42,7 @@ export default function ButtonAppBar({carGroups, setSelectedCarGroupCard}) {
   const handleCarGroupItemClick = (event) => {
     event.preventDefault()
     const indexOfCarGroupListItem = event.currentTarget.value
-    setSelectedCarGroupCard(car.CarGroups[indexOfCarGroupListItem])
+    setSelectedCarGroupCard(carGroups.CarGroups[indexOfCarGroupListItem])
   }
 
   const list = (anchor) => (
