@@ -17,7 +17,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
 
-export default function ButtonAppBar({carGroups}) {
+export default function ButtonAppBar({carGroups, setSelectedCarGroupCard}) {
   const [drawerState, setDrawerState] = React.useState({
     top: false,
     left: false,
@@ -39,6 +39,12 @@ export default function ButtonAppBar({carGroups}) {
     setDrawerState({ ...drawerState, [anchor]: open });
   };
 
+  const handleCarGroupItemClick = (event) => {
+    event.preventDefault()
+    const indexOfCarGroupListItem = event.currentTarget.value
+    setSelectedCarGroupCard(car.CarGroups[indexOfCarGroupListItem])
+  }
+
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -47,8 +53,8 @@ export default function ButtonAppBar({carGroups}) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-      {carGroups.CarGroups.map((item) => (
-          <ListItem key={item.CarGroupNumber} disablePadding>
+      {carGroups.CarGroups.map((item, index) => (
+          <ListItem key={item.CarGroupNumber} disablePadding onClick={handleCarGroupItemClick} value={index} >
             <ListItemButton>
               <ListItemIcon>
                 <DirectionsCarFilledIcon />

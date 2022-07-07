@@ -22,7 +22,7 @@ const defaultCarGroupInfo = {
   People: [{ name: "" }],
 }
 
-export default function CarGroupCard({ setRefresh, resetCarGroupCard }) {
+export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCarGroupCard }) {
 
   const [peopleInputFields, setPeopleInputFields] = React.useState([
     { name: "" },
@@ -34,6 +34,10 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard }) {
   React.useEffect(() => {
     setCarGroupInfo(defaultCarGroupInfo)
   },[resetCarGroupCard])
+
+  React.useEffect(() => {
+    setCarGroupInfo(selectedCarGroupCard)
+  },[selectedCarGroupCard])
 
   const handleAddPeopleInputField = () => {
     let newPerson = { name: "" };

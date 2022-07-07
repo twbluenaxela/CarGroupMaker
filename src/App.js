@@ -24,6 +24,7 @@ function App() {
   const [carGroups, setCarGroups] = React.useState(null)
   const [refresh, setRefresh] = React.useState(0)
   const [resetCarGroupCard, setResetCarGroupCard] = React.useState(null)
+  const [selectedCarGroupCard, setSelectedCarGroupCard] = React.useState(null)
 
   // const forceUpdate = () => {
   //   setRefresh(val => val + 1)
@@ -67,9 +68,9 @@ function App() {
 
   return (
     <div>
-      <ButtonAppBar carGroups={carGroups ? carGroups : defaultCarGroup} />
+      <ButtonAppBar carGroups={carGroups ? carGroups : defaultCarGroup} setSelectedCarGroupCard={setSelectedCarGroupCard} />
       <AddCarGroupButton setResetCarGroupCard={setResetCarGroupCard} />
-      <CarGroupCard setRefresh={setRefresh} resetCarGroupCard={resetCarGroupCard}/>
+      <CarGroupCard setRefresh={setRefresh} resetCarGroupCard={resetCarGroupCard} selectedCarGroupCard={selectedCarGroupCard}/>
     </div>
   );
 }
