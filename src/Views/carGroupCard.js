@@ -107,7 +107,7 @@ export default function CarGroupCard({ setRefresh, resetCarGroupCard, selectedCa
       xs={true}
       direction="column"
       alignItems="center"
-      justify="center"
+      justifyContent="center"
       style={{ minHeight: "100vh", paddingTop: "80px" }}
     >
       <Card sx={{ minWidth: 275 }}>
