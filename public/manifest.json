@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "车组 App",
+  "name": "车组管理小助手",
   "icons": [
     {
       "src": "favicon.ico",
