@@ -147,7 +147,7 @@ export default function CarGroupCard({
       direction="column"
       alignItems="center"
       justifyContent="center"
-      style={{ minHeight: "100vh" }}
+      style={{ minHeight: "80vh" }}
     >
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
