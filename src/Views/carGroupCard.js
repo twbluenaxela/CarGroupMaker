@@ -44,7 +44,7 @@ export default function CarGroupCard({
   };
 
   React.useEffect(() => {
-    setCarGroupInfo(defaultCarGroupInfo);
+    setCarGroupInfo({...defaultCarGroupInfo, People: [{name: "小冰"}]});
   }, [resetCarGroupCard]);
 
   React.useEffect(() => {
