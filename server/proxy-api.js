@@ -1,6 +1,27 @@
 const { isIfStatement } = require("@babel/types");
-const express = require("express");
-const fs = require('fs');
+const express = require("express")
+const firebase = require('firebase')
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyC-xmNis75UzA8eWwm4aBGBG3xly5zUfCU",
+  authDomain: "cargroupapp.firebaseapp.com",
+  projectId: "cargroupapp",
+  storageBucket: "cargroupapp.appspot.com",
+  messagingSenderId: "599640661748",
+  appId: "1:599640661748:web:8305e1ddb8596a773888a1"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig)
+
+let database = firebase.database()
+
 
 // const webScraper = require("../webscraper");
 // const categoryScraper = require("../categoryscraper")
