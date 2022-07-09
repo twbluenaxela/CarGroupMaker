@@ -197,13 +197,17 @@ export default function CarGroupCard({
             onSubmit={handleSubmit}
           >
             <TextField
-              id="outlined-basic"
+              id="outlined-number"
               label="Car Group # 车组号码"
               variant="outlined"
               size="small"
+              type="number"
               name="CarGroupNumber"
               value={carGroupInfo.CarGroupNumber}
               onChange={handleInputChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
             <br />
             <TextField
@@ -272,6 +276,7 @@ export default function CarGroupCard({
       <Snackbar
         name="saveSnackbar"
         open={open}
+        color="success"
         autoHideDuration={1500}
         onClose={closeSnackbar}
         message={snackbarMessage ? snackbarMessage : undefined}
