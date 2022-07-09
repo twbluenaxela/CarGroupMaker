@@ -1,10 +1,10 @@
 {
-  "CarGroups": [
-    {
-      "CarGroupNumber": "1",
-      "TerritoryNumber": "",
-      "HoursOut": "0",
-      "People": [{ "name": "小冰" }]
-    }
-  ]
+	"CarGroups": [{
+		"CarGroupNumber": "1",
+		"HoursOut": "0",
+		"People": [{
+			"name": "小冰"
+		}],
+		"TerritoryNumber": ""
+	}]
 }

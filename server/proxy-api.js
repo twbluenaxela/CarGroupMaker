@@ -68,8 +68,8 @@ router.post("/newcargroup", (req, res) => {
   rootRef.once("value").then(function (snapshot) {
     console.log("Printing out snapshot values...");
     // console.log(snapshot.val());
-    let carGroupsDb = JSON.parse(snapshot.val());
-    // let carGroupsDb = snapshot.val();
+    // let carGroupsDb = JSON.parse(snapshot.val());
+    let carGroupsDb = snapshot.val();
     console.log(carGroupsDb);
     // res.send(cargroups);
     let dataToWrite;
@@ -88,10 +88,13 @@ router.post("/newcargroup", (req, res) => {
         console.log(element);
       }
     });
-    dataToWrite = JSON.stringify(carGroupsDb);
+    // dataToWrite = JSON.stringify(carGroupsDb);
+    dataToWrite = carGroupsDb
   } else {
     carGroupsDb.CarGroups.push(ReceivedCarGroupObj);
-    dataToWrite = JSON.stringify(carGroupsDb);
+    // dataToWrite = JSON.stringify(carGroupsDb);
+    dataToWrite = carGroupsDb
+
   }
 
   console.log("Updating the database...");
@@ -134,8 +137,8 @@ router.post("/deletecargroup", async (req, res) => {
   rootRef.once("value").then(function (snapshot) {
     console.log("Printing out snapshot values...");
     // console.log(snapshot.val());
-    let carGroupsDb = JSON.parse(snapshot.val());
-    // let carGroupsDb = snapshot.val();
+    // let carGroupsDb = JSON.parse(snapshot.val());
+    let carGroupsDb = snapshot.val();
     console.log(carGroupsDb);
 
 
@@ -145,7 +148,8 @@ router.post("/deletecargroup", async (req, res) => {
   if (indexOfItemToDelete > -1) {
     carGroupsDb.CarGroups.splice(indexOfItemToDelete, 1);
     console.log(carGroupsDb);
-    let data = JSON.stringify(carGroupsDb);
+    // let data = JSON.stringify(carGroupsDb);
+    let data = carGroupsDb
     console.log(data);
     console.log("Deleting from database...");
     rootRef.set(data)
