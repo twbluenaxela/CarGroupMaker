@@ -4,10 +4,15 @@ const express = require("express");
 const fs = require("fs");
 const { initializeApp, getDatabase, set } = require("firebase-admin/app");
 const admin = require("firebase-admin");
-const serviceAccount = require("../serviceAccountKey.json");
+require("dotenv").config();
+// const serviceAccount = require("../serviceAccountKey.json");
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert({
+    "projectId": process.env.project_id,
+    "private_key": process.env.private_key.replace(/\\n/g, '\n'),
+    "client_email": process.env.client_email,
+  }),
   databaseURL: "https://cargroupapp-default-rtdb.firebaseio.com",
 });
 
