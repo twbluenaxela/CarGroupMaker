@@ -40,6 +40,11 @@ function App() {
     })
   }
 
+  const generateRandomNumber = () => {
+    const randomNumber = Math.floor(Math.random() * 1000) + 1
+    return randomNumber
+  }
+
   React.useEffect(() => {
     getDatabaseInfo();
   },[])
@@ -49,7 +54,7 @@ function App() {
   },[refresh])
 
   const defaultCarGroup = {CarGroups: [{ 
-    CarGroupNumber: "1",
+    CarGroupNumber: generateRandomNumber(),
     TerritoryNumber: "",
     HoursOut: "0",
     People: []

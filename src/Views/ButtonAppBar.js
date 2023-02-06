@@ -46,7 +46,6 @@ export default function ButtonAppBar({carGroups, setSelectedCarGroupCard}) {
     setSelectedCarGroupCard(carGroups.CarGroups[indexOfCarGroupListItem])
   }
 
- 
 
   const list = (anchor) => (
     <Box
@@ -89,6 +88,7 @@ export default function ButtonAppBar({carGroups, setSelectedCarGroupCard}) {
           </Typography>
         </Toolbar>
       </AppBar>
+      <Toolbar></Toolbar>
       <React.Fragment key={"left"}>
         <SwipeableDrawer
           anchor={"left"}
