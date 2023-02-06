@@ -17,8 +17,13 @@ import axios from "axios";
 import Divider from "@mui/material/Divider";
 import Snackbar from "@mui/material/Snackbar";
 
+const generateRandomNumber = () => {
+  const randomNumber = Math.floor(Math.random() * 1000) + 1
+  return randomNumber
+}
+
 const defaultCarGroupInfo = {
-  CarGroupNumber: "1",
+  CarGroupNumber: generateRandomNumber(),
   TerritoryNumber: "",
   HoursOut: "0",
   People: [{ name: "小冰" }],
@@ -63,6 +68,7 @@ export default function CarGroupCard({
       People: data,
     });
   };
+
 
   const handleRemovePeopleInputField = (index) => {
     // let data = [...peopleInputFields];
@@ -164,14 +170,6 @@ export default function CarGroupCard({
             >
               Car Group 车组
               
-              {/**
-             * <IconButton aria-label="delete car group" size="small" onClick={handleDelete}>
-              <DeleteIcon fontSize="inherit" />
-            </IconButton>
-             * 
-             * 
-             * 
-             */}
             </Typography>
             <Button
                 variant="outlined"
