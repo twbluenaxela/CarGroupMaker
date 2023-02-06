@@ -45,6 +45,11 @@ export default function AddCarGroupButton({ setResetCarGroupCard }) {
     </React.Fragment>
   );
 
+  const generateRandomNumber = () => {
+    const randomNumber = Math.floor(Math.random() * 1000) + 1
+    return randomNumber
+  }
+
   const makeBlankCarGroupCard = () => {
     console.log("Sending request to make a new blank card...");
     setResetCarGroupCard((prevVal) => prevVal + 1);
